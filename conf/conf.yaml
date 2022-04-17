@@ -1,0 +1,18 @@
+# Mysql服务配置
+mysql:
+  driverName: mysql
+  host: 127.0.0.1
+  port: 3306
+  database: you_database
+  username: admin
+  password: admin
+  charset: utf8mb4
+  parseTime: True
+  loc: Local
+
+# MinIO文件存储服务器配置
+minio:
+  endpoint: 127.0.0.1:9000
+  access: you_access
+  accessKey: admin
+  secretKey: admin

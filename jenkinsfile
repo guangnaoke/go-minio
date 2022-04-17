@@ -1,0 +1,21 @@
+pipeline {
+  agent {
+    docker {
+      image 'golang:1.17.8-stretch'
+    }
+  }
+  stages {
+    stage('Build') {
+      steps {
+        sh "chmod +x -R ${env.WORKSPACE}"
+        sh 'go env -w GOPROXY=https://goproxy.cn,direct'
+        sh 'go mod tidy'
+      }
+    }
+    stage('Test') {
+      steps {
+        sh 'go test ./utils -count=1 -v'
+      }
+    }
+  }
+}

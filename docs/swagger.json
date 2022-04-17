@@ -1,0 +1,343 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a Minio Server",
+        "title": "Swagger Example API",
+        "contact": {},
+        "version": "0.0.1"
+    },
+    "host": "localhost:8082",
+    "basePath": "/",
+    "paths": {
+        "/api/buckets/exists": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "ApiKeyXRole": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "buckets"
+                ],
+                "summary": "获取存储桶详细信息",
+                "responses": {
+                    "200": {
+                        "description": "{\"message\": \"获取成功\", status: 1}"
+                    },
+                    "400": {
+                        "description": "{\"message\": \"获取失败\", status: -1}"
+                    }
+                }
+            }
+        },
+        "/api/buckets/list": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "buckets"
+                ],
+                "summary": "获取存储桶列表",
+                "responses": {
+                    "200": {
+                        "description": "{\"message\": \"获取成功\", status: 1}"
+                    },
+                    "400": {
+                        "description": "{\"message\": \"获取失败\", status: -1}"
+                    }
+                }
+            }
+        },
+        "/api/buckets/listobjects": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "buckets"
+                ],
+                "summary": "获取存储桶内所有文件列表",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "存储桶名必传",
+                        "name": "bucket",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"message\": \"获取成功\", status: 1}"
+                    },
+                    "400": {
+                        "description": "{\"message\": \"获取失败\", status: -1}"
+                    }
+                }
+            }
+        },
+        "/api/buckets/remove": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "ApiKeyXRole": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "buckets"
+                ],
+                "summary": "删除存储桶",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "存储桶名必传",
+                        "name": "bucket",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"message\": \"删除成功\", status: 1}"
+                    },
+                    "400": {
+                        "description": "{\"message\": \"删除失败\", status: -1}"
+                    }
+                }
+            }
+        },
+        "/api/object/remove": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "ApiKeyXRole": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "objects"
+                ],
+                "summary": "删除文件",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "存储桶名必传",
+                        "name": "bucket",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "文件名必传",
+                        "name": "object",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"message\": \"删除成功\", status: 1}"
+                    },
+                    "400": {
+                        "description": "{\"message\": \"删除失败\", status: -1}"
+                    }
+                }
+            }
+        },
+        "/api/object/upload": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "ApiKeyXRole": []
+                    }
+                ],
+                "consumes": [
+                    "application/json",
+                    "multipart/form-data"
+                ],
+                "tags": [
+                    "objects"
+                ],
+                "summary": "上传文件",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "文件名必传",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "存储桶名必传",
+                        "name": "bucket",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"message\": \"删除成功\", status: 1}"
+                    },
+                    "400": {
+                        "description": "{\"message\": \"删除失败\", status: -1}"
+                    }
+                }
+            }
+        },
+        "/api/object/url": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "ApiKeyXRole": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "objects"
+                ],
+                "summary": "获取文件的url",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "存储桶名必传",
+                        "name": "bucket",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "文件名必传",
+                        "name": "object",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"message\": \"获取成功\", status: 1}"
+                    },
+                    "400": {
+                        "description": "{\"message\": \"获取失败\", status: -1}"
+                    }
+                }
+            }
+        },
+        "/api/user/info": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "注意: header设置token时前面带 Bearer + 空格",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "获取用户信息",
+                "responses": {
+                    "200": {
+                        "description": "{\"message\": \"获取成功\", status: 1}"
+                    },
+                    "400": {
+                        "description": "{\"message\": \"获取失败\", status: -1}"
+                    }
+                }
+            }
+        },
+        "/api/user/login": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "登录",
+                "parameters": [
+                    {
+                        "description": "账号密码必须填",
+                        "name": "bucket",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/swagger.Login"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"message\": \"登录成功\", status: 1}"
+                    },
+                    "400": {
+                        "description": "{\"message\": \"登录失败\", status: -1}"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "swagger.Login": {
+            "type": "object",
+            "properties": {
+                "access_key": {
+                    "type": "string"
+                },
+                "secret_key": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        },
+        "ApiKeyXRole": {
+            "type": "apiKey",
+            "name": "x-role",
+            "in": "header"
+        }
+    }
+}
